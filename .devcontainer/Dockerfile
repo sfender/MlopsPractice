@@ -16,17 +16,24 @@ ARG USER_GID=$USER_UID
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils 2>&1 \
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
-    && apt-get -y install git iproute2 procps lsb-release wget\
-    #
-    # Clean up
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* 
+    && apt-get -y install git iproute2 procps lsb-release wget
 # install DVC
 RUN wget https://dvc.org/deb/dvc.list -O /etc/apt/sources.list.d/dvc.list \ 
     && apt-get update \
     && apt-get install dvc
+## install dvc compelitation
+RUN apt install --reinstall bash-completion \
+    && wget -O /etc/bash_completion.d/dvc https://raw.githubusercontent.com/iterative/dvc/master/scripts/completion/dvc.bash \
+    && echo ". /etc/bash_completion" >> ~/.bashrc
+## install git compelitation 
+RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -O ~/.git-completion.bash \
+    && chmod a+x ~/.git-completion.bash \
+    && echo "source ~/.git-completion.bash" >> ~/.bashrc
+# Clean up
+RUN apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/* 
 # install mlflow
 RUN pip install mlflow
 # Switch back to dialog for any ad-hoc use of apt-get
-#ENV DEBIAN_FRONTEND=dialog
+ENV DEBIAN_FRONTEND=dialog
