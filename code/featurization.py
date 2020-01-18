@@ -44,7 +44,7 @@ def save_matrix(df, matrix, output):
         pickle.dump(result, fd, pickle.HIGHEST_PROTOCOL)
     pass
 
-df_train = get_df(train_input)
+df_train = get_df(train_input).head(3000)
 train_words = np.array(df_train.text.str.lower().values.astype('U'))
 
 bag_of_words = CountVectorizer(stop_words='english',
