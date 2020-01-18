@@ -1,0 +1,7 @@
+md5: 7559eb45beb7e90f192e836be8032a64
+outs:
+- md5: ec1d2935f811b77cc49b031b999cbf17
+  path: Posts.xml.zip
+  cache: true
+  metric: false
+  persist: false
