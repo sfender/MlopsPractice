@@ -1,9 +1,9 @@
-md5: ec4c46aa9d1e42d5bb8dd60520b07f1c
+md5: bc2dd38c3980206839361ad754e0f1c1
 cmd: python code/train_model.py 20180319
 deps:
 - md5: 50e7a3ad5fbc7cef8ed92e366069194a
   path: data/matrix-train.p
-- md5: 287063c8a38ede0dcd783a21fd366878
+- md5: 399d0a709e663ce8f4d1890e2240cc1f
   path: code/train_model.py
 - md5: 17f591c0c65a450fd53b34ba0ac6df7b
   path: code/conf.py

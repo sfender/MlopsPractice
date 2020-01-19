@@ -5,6 +5,9 @@ import conf
 try: import cPickle as pickle   # python2
 except: import pickle           # python3
 
+import mlflow
+import mlflow.sklearn
+
 if len(sys.argv) != 2:
     sys.stderr.write('Arguments error. Usage:\n')
     sys.stderr.write('\tpython train_model.py INPUT_MATRIX_FILE SEED OUTPUT_MODEL_FILE\n')
@@ -24,8 +27,15 @@ sys.stderr.write('Input matrix size {}\n'.format(matrix.shape))
 sys.stderr.write('X matrix size {}\n'.format(x.shape))
 sys.stderr.write('Y matrix size {}\n'.format(labels.shape))
 
-clf = RandomForestClassifier(n_estimators=700, n_jobs=5, random_state=seed)
+n_estimators = 700
+n_jobs = 5
+
+clf = RandomForestClassifier(n_estimators=n_estimators, n_jobs=n_jobs, random_state=seed)
 clf.fit(x, labels)
+
+mlflow.log_param("n_estimators", n_estimators)
+mlflow.log_param("n_jobs", n_jobs)
+mlflow.log_param("seed", seed)
 
 with open(output, 'wb') as fd:
     pickle.dump(clf, fd)

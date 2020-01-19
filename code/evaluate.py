@@ -3,6 +3,9 @@ import sys
 import sklearn.metrics as metrics
 import conf
 
+import mlflow
+import mlflow.sklearn
+
 try: import cPickle as pickle   # python2
 except: import pickle           # python3
 
@@ -26,6 +29,9 @@ precision, recall, thresholds = precision_recall_curve(labels, predictions)
 
 auc = metrics.auc(recall, precision)
 #print('AUC={}'.format(metrics.auc(recall, precision)))
+
+mlflow.log_metric("auc", auc)
+
 with open(metrics_file, 'w') as fd:
     fd.write('AUC: {:4f}\n'.format(auc))
 
