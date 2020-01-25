@@ -1,4 +1,5 @@
 ['remote "upstream"']
-url = /gs://dvc-push-test/obata
+url = gs://dvc-push-test
+endpointurl = https://console.cloud.google.com/storage/browser/dvc-push-test
 [core]
 remote = upstream
