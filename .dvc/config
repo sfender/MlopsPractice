@@ -1,0 +1,4 @@
+['remote "upstream"']
+url = /gs://dvc-push-test/obata
+[core]
+remote = upstream
